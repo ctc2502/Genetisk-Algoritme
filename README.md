@@ -1,0 +1,1 @@
+# Implementering-og-visualisering-af-en-genetisk-algoritme.
