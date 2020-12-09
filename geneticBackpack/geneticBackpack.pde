@@ -1,12 +1,9 @@
-ArrayList<Items> AllItemList;
+ArrayList<Items> Backpack;
 DATA D = new DATA();
 
-int TOTALSPACE = 24;
-
 void setup() {
-  AllItemList = new ArrayList<Items>();
+  Backpack = new ArrayList<Items>();
   D.loadData();
-  println(AllItemList.size());
 }
 
 void draw() {
@@ -48,9 +45,9 @@ class DATA {
             ITEM = CELLS[0];
             WEIGHT = Integer.parseInt(CELLS[1]);
             PRICE = Integer.parseInt(CELLS[2]);
-            AllItemList.add(new Items(ITEM, WEIGHT, PRICE));
+            Backpack.add(new Items(ITEM, WEIGHT, PRICE));
               println(ITEM + " " + WEIGHT + " " + PRICE);
-              //println(AllItemList.get(0));
+              println(Backpack.get(j-1));
             }
         }
   /*
