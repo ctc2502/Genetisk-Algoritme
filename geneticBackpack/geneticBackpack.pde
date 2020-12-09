@@ -17,10 +17,10 @@ void setup() {
  void loadData() {
         ROWS = loadStrings("items.csv");
         HEADERS = ROWS[0].split(";");
-        for (int j = 0; j < ROWS.length; j++) {
+        for (int j = 1; j < ROWS.length; j++) {
             String[] CELLS = ROWS[j].split(";");
-            for (int i = 2; i < CELLS.length; i++) {
-              println(CELLS[0] + CELLS[1] + CELLS[2]);
+            int WEIGHT = Integer.parseInt(CELLS[1]);
+            int PRICE = Integer.parseInt(CELLS[2]);
+              println(CELLS[0] + " " + WEIGHT + " " + PRICE);
             }
         }
-    }
