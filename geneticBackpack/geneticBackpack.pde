@@ -26,41 +26,43 @@ class DATA {
   String[] ROWS = new String[24];
   String[] HEADERS;
   
- String[] genes;
- 
  String[] ITEM = new String[ROWS.length];
  int[] WEIGHT = new int[ROWS.length];
  int[] PRICE = new int[ROWS.length];
  
+ int MAXWEIGHT;
+ int FITNESS;
+ int MASS;
+ int BPNUM;
+ 
+ int[] BACKPACK = new int[ROWS.length];
+ 
+ 
  DATA() {
-   /* genes = new String[AllItemList.size()];
-   for (int i = 0; i < genes.length; i++){
-     genes[i] = (String) random(Items);
-   } */
+  MAXWEIGHT = 2500;
+  FITNESS = 0;
+  MASS = 0;
+  BPNUM = 0;
  }
 
  void loadData() {
         ROWS = loadStrings("items.csv");
         HEADERS = ROWS[0].split(";");
-        for (int j = 1; j < ROWS.length-1; j++) {
-            String[] CELLS = ROWS[j].split(";");
-            ITEM[j-1] = CELLS[0];
-            WEIGHT[j-1] = Integer.parseInt(CELLS[1]);
-            PRICE[j-1] = Integer.parseInt(CELLS[2]);
-            Backpack.add(new Items(ITEM[j-1], WEIGHT[j-1], PRICE[j-1]));
-              println(ITEM[j-1] + " " + WEIGHT[j-1] + " " + PRICE[j-1]);
-              println(Backpack.get(j-1));
+        for (int i = 1; i < ROWS.length; i++) {
+            String[] CELLS = ROWS[i].split(";");
+            ITEM[i-1] = CELLS[0];
+            WEIGHT[i-1] = Integer.parseInt(CELLS[1]);
+            PRICE[i-1] = Integer.parseInt(CELLS[2]);
+            Backpack.add(new Items(ITEM[i-1], WEIGHT[i-1], PRICE[i-1]));
+              println(ITEM[i-1] + " " + WEIGHT[i-1] + " " + PRICE[i-1]);
+              println(Backpack.get(i-1));
             }
-        }
-  /*
-   void calcFitness (String target) {
-     int score = 0;
-     for (int i = 0; i < genes.length; i++) {
-        if (genes[i] == target.StringAt(i)) {
-          score++;
-        }
+        }  
+   void calcFitness () {
+     for (int j=0; j < 10; j++){
+       for (int i = 0; i < ITEM.length; i++) {
+       }
      }
-     fitness = (float)score / (float)target.length();
-  } */
+  }
 }
   
