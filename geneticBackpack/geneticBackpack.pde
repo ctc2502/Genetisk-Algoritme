@@ -1,31 +1,27 @@
 ArrayList<Items> Backpack;
+ int[] BACKPACK = new int[26];
 PrintWriter OUTPUT;
 DATA D = new DATA();
 
 void setup() {
+  size(1000, 1000);
   Backpack = new ArrayList<Items>();
   OUTPUT = createWriter("data.txt");
+  textAlign(CENTER);
+  frameRate(5);
   
   D.loadData();
-  D.calcFitness();
+  
 }
 
 void draw() {
- /* for (int i = 0; i < population.length; i++) {
-    population[i].calcFitness(target);
-  }
-
-  ArrayList<DNA> matingPool = new ArrayList<DNA>(); 
-
-  for (int i = 0; i < population.length; i++) {
-    int nnnn = int(population[i].fitness * 100);
-    for (int j = 0; j <nnnn; j++) {              
-      matingPool.add(population[i]);
-    } */
+    background(0);
+    D.calcFitness();
+    
 }
 
 class DATA {
-  String[] ROWS = new String[24];
+  String[] ROWS = new String[BACKPACK.length-2];
   String[] HEADERS;
   
  String[] ITEM = new String[ROWS.length];
@@ -36,10 +32,6 @@ class DATA {
  int FITNESS;
  int MASS;
  int BPNUM;
- 
- int[] BACKPACK = new int[ROWS.length];
- 
- 
  
  DATA() {
   MAXWEIGHT = 2500;
@@ -57,22 +49,25 @@ class DATA {
             WEIGHT[i-1] = Integer.parseInt(CELLS[1]);
             PRICE[i-1] = Integer.parseInt(CELLS[2]);
             Backpack.add(new Items(ITEM[i-1], WEIGHT[i-1], PRICE[i-1]));
-              println(ITEM[i-1] + " " + WEIGHT[i-1] + " " + PRICE[i-1]);
-              println(Backpack.get(i-1));
+              //println(ITEM[i-1] + " " + WEIGHT[i-1] + " " + PRICE[i-1]);
+              //println(Backpack.get(i-1));
             }
         }  
    void calcFitness () {
-     for (int j=0; j < 10; j++){
+     FITNESS = 0;
+     MASS = 0;
+     for (int j=0; j < ITEM.length; j++){
        for (int i = 0; i < ITEM.length; i++) {
-         float SORT = random(1);
-         if (SORT > 0.5) {
+           float SORT = random(0,1);
+         if (SORT < 0.05) {
            BACKPACK[i] = 1;
            MASS += WEIGHT[i];
            FITNESS += PRICE[i];
-           BACKPACK[10] = FITNESS;
-           BACKPACK[11] = MASS;
-           if (MASS > MAXWEIGHT) {
-             BACKPACK[10] = 0;
+           BACKPACK[BACKPACK.length-1] = FITNESS;
+           BACKPACK[BACKPACK.length-2] = MASS;
+           println(SORT);
+           if (MASS < MAXWEIGHT) {
+             BACKPACK[BACKPACK.length-2] = 0;
            }
          }
        }
@@ -86,12 +81,16 @@ class DATA {
   }
   
   void printBP(){
+    clear();
     for (int i = 0; i < BACKPACK.length; i++) {
        OUTPUT.print(BACKPACK[i] + " ");
+       fill(0,255,0);
+       text(BACKPACK[i], 50, 50+i*20);
      }
+     
      OUTPUT.println();
      OUTPUT.flush();
-     if (BPNUM == 5) {
+     if (BPNUM == 10) {
        OUTPUT.close();
      }
   }
