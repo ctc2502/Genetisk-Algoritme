@@ -23,14 +23,14 @@ void draw() {
 }
 
 class DATA {
-  String[] ROWS;
+  String[] ROWS = new String[24];
   String[] HEADERS;
   
  String[] genes;
  
- String ITEM;
- int WEIGHT;
- int PRICE;
+ String[] ITEM = new String[ROWS.length];
+ int[] WEIGHT = new int[ROWS.length];
+ int[] PRICE = new int[ROWS.length];
  
  DATA() {
    /* genes = new String[AllItemList.size()];
@@ -42,13 +42,13 @@ class DATA {
  void loadData() {
         ROWS = loadStrings("items.csv");
         HEADERS = ROWS[0].split(";");
-        for (int j = 1; j < ROWS.length; j++) {
+        for (int j = 1; j < ROWS.length-1; j++) {
             String[] CELLS = ROWS[j].split(";");
-            ITEM = CELLS[0];
-            WEIGHT = Integer.parseInt(CELLS[1]);
-            PRICE = Integer.parseInt(CELLS[2]);
-            Backpack.add(new Items(ITEM, WEIGHT, PRICE));
-              println(ITEM + " " + WEIGHT + " " + PRICE);
+            ITEM[j-1] = CELLS[0];
+            WEIGHT[j-1] = Integer.parseInt(CELLS[1]);
+            PRICE[j-1] = Integer.parseInt(CELLS[2]);
+            Backpack.add(new Items(ITEM[j-1], WEIGHT[j-1], PRICE[j-1]));
+              println(ITEM[j-1] + " " + WEIGHT[j-1] + " " + PRICE[j-1]);
               println(Backpack.get(j-1));
             }
         }
